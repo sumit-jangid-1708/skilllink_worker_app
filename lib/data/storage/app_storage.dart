@@ -13,9 +13,16 @@ class AppStorage {
     }
   }
 
-  // Get Tokens
-  static String? getToken() => _storage.read(_tokenKey);
-  static String? getRefreshToken() => _storage.read(_refreshKey);
+  // Get Tokens (Added type safety)
+  static String? getToken() {
+    final data = _storage.read(_tokenKey);
+    return data is String ? data : null;
+  }
+
+  static String? getRefreshToken() {
+    final data = _storage.read(_refreshKey);
+    return data is String ? data : null;
+  }
 
   // Check if token exists
   static bool hasToken() {

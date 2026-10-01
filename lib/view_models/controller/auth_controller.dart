@@ -58,6 +58,7 @@ class AuthController extends GetxController with BaseController {
       verifyOtpModel.value = model;
     } catch (e) {
       isLoading.value = false;
+      print("Error in verifyOtp: $e");
       handleError(e, onRetry: () => verifyOtp(phoneNumber, otp));
     }
   }
