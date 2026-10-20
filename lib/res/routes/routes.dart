@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
 import '../../view/auth/login_screen.dart';
+import '../../view/dashboard/dashboard.dart';
+import '../../view/home/home_screen.dart';
+import '../../view/jobs/jobs_screen.dart';
+import '../../view/profile/profile_screen.dart';
 import '../../view/splash_screen/splash_screen.dart';
 import 'routes_names.dart';
-import 'package:flutter/material.dart';
 
 class AppRoutes {
   static List<GetPage> appRoutes() => [
@@ -16,14 +19,22 @@ class AppRoutes {
       page: () => const LoginScreen(),
       transition: Transition.rightToLeftWithFade,
     ),
-    // Placeholder for Dashboard/Home if they don't exist yet
     GetPage(
       name: RouteName.dashboardScreen,
-      page: () => const Scaffold(body: Center(child: Text("Dashboard"))),
+      page: () => const Dashboard(),
+      transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
       name: RouteName.homeScreen,
-      page: () => const Scaffold(body: Center(child: Text("Home"))),
+      page: () => const HomeScreen(),
+    ),
+    GetPage(
+      name: RouteName.jobsScreen,
+      page: () => const JobsScreen(),
+    ),
+    GetPage(
+      name: RouteName.profileScreen,
+      page: () => const ProfileScreen(),
     ),
   ];
 }

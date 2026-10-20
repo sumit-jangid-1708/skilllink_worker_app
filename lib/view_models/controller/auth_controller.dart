@@ -3,6 +3,7 @@ import '../../data/storage/app_storage.dart';
 import '../../models/send_otp_model.dart';
 import '../../models/verify_otp_model.dart';
 import '../../data/app_exceptions.dart';
+import '../../res/routes/routes_names.dart';
 import '../../utils/utils.dart';
 import '../services/auth_service.dart';
 import 'base_controller.dart';
@@ -50,12 +51,15 @@ class AuthController extends GetxController with BaseController {
       if (model.tokens.access.isEmpty) {
         throw FetchDataException("Authentication failed: No access token received");
       }
-
       // Save both access and refresh tokens
       await AppStorage.saveToken(model.tokens.access, refresh: model.tokens.refresh);
 
+
       isLoading.value = false;
       verifyOtpModel.value = model;
+
+      Utils.successToast("Login Successful");
+      Get.offAllNamed(RouteName.dashboardScreen);
     } catch (e) {
       isLoading.value = false;
       print("Error in verifyOtp: $e");

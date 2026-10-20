@@ -35,11 +35,10 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     });
 
-    // Listen for successful verification to navigate to Dashboard
+    // Listen for successful verification
     ever(authController.verifyOtpModel, (model) {
       if (model != null) {
-        // Get.offAll(() =>  DashboardScreen());
-        Utils.successToast("Login Successful");
+        // Navigation is handled in AuthController
       }
     });
   }
