@@ -14,4 +14,8 @@ class AuthService{
     return response;
   }
 
+  Future<dynamic> getTechnicianProfileApi() async {
+    return await _apiServices.getApi(AppUrl.technicianProfile);
+  }
+
 }

@@ -124,7 +124,7 @@ dynamic returnResponse(http.Response response) {
     case 201:  // ✅ 201 Created bhi add kiya
       return jsonDecode(response.body);
     case 400:
-      return jsonDecode(response.body);
+      throw FetchDataException(response.body);
     case 401:
       throw UnauthorizedException('Please login again');
     case 403:

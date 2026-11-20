@@ -35,6 +35,14 @@ class _HomeHeaderState extends State<HomeHeader> {
   }
 
   @override
+  void didUpdateWidget(covariant HomeHeader oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialOnlineStatus != widget.initialOnlineStatus) {
+      isOnline = widget.initialOnlineStatus;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final topPadding = MediaQuery.of(context).padding.top;
 

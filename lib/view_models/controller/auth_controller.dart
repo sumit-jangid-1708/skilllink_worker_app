@@ -48,6 +48,10 @@ class AuthController extends GetxController with BaseController {
       final response = await authService.verifyOtpApi(data);
       VerifyOtpResponseModel model = VerifyOtpResponseModel.fromJson(response);
 
+      if (model.user.role != 'technician') {
+        throw FetchDataException('This account is not registered as a technician');
+      }
+
       if (model.tokens.access.isEmpty) {
         throw FetchDataException("Authentication failed: No access token received");
       }
@@ -55,11 +59,21 @@ class AuthController extends GetxController with BaseController {
       await AppStorage.saveToken(model.tokens.access, refresh: model.tokens.refresh);
 
 
-      isLoading.value = false;
       verifyOtpModel.value = model;
 
       Utils.successToast("Login Successful");
-      Get.offAllNamed(RouteName.dashboardScreen);
+      dynamic profile;
+      try {
+        profile = await authService.getTechnicianProfileApi();
+      } catch (_) {
+        isLoading.value = false;
+        Get.offAllNamed(RouteName.dashboardScreen);
+        return;
+      }
+      isLoading.value = false;
+      final needsSetup = (profile['full_name'] ?? '').toString().trim().isEmpty ||
+          (profile['skill_categories'] is! List || (profile['skill_categories'] as List).isEmpty);
+      Get.offAllNamed(needsSetup ? RouteName.setupProfileScreen : RouteName.dashboardScreen);
     } catch (e) {
       isLoading.value = false;
       print("Error in verifyOtp: $e");

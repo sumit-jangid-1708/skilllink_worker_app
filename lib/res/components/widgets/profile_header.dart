@@ -9,7 +9,7 @@ class ProfileHeader extends StatelessWidget {
   final List<String> skills;
   final String jobsCount;
   final String rating;
-  final String acceptRate;
+  final String completionRate;
 
   const ProfileHeader({
     super.key,
@@ -21,7 +21,7 @@ class ProfileHeader extends StatelessWidget {
     this.skills = const ["Electrician", "AC Repair", "Wiring"],
     this.jobsCount = "28",
     this.rating = "4.8",
-    this.acceptRate = "98%",
+    this.completionRate = "—",
   });
 
   @override
@@ -180,7 +180,7 @@ class ProfileHeader extends StatelessWidget {
                   color: Colors.white.withValues(alpha: 0.3),
                 ),
                 Expanded(
-                  child: _buildStatItem(acceptRate, "Accept"),
+                  child: _buildStatItem(completionRate, "Completion"),
                 ),
               ],
             ),
